@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+message Point {
+  float x = 1;
+  float y = 2;
+}
+
+message GetPositionRequest {
+}
+
+message GetPositionResponse {
+  Point p = 1;
+}
+
+service PositionService {
+  rpc GetPosition(GetPositionRequest) returns (GetPositionResponse) {}
+}
+

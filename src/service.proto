@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+import "graph_data.proto";
+
+message GetGraphListRequest {
+}
+
+message GetGraphListResponse {
+  GraphList graphs = 1;
+}
+
+message GetGraphRequest {
+  string graph_id = 1;
+}
+
+message GetGraphResponse {
+  UtilityGraph graph = 1;
+}
+
+message AddGraphRequest {
+  UtilityGraph graph = 1;
+}
+
+message AddGraphResponse {
+  UtilityGraph graph = 1;
+}
+
+message RemoveGraphRequest {
+  string graph_id = 1;
+}
+
+message RemoveGraphResponse {
+  string graph_id = 1;
+}
+
+message AddNodeRequest {
+  string graph_id = 1;
+  UtilityGraphNode node = 2;
+}
+
+message AddNodeResponse {
+  string graph_id = 1;
+  UtilityGraphNode node = 2;
+}
+
+message UpdateNodeRequest {
+  string graph_id = 1;
+  UtilityGraphNode node = 2;
+}
+
+message UpdateNodeResponse {
+  string graph_id = 1;
+  UtilityGraphNode node = 2;
+}
+
+message RemoveNodeRequest {
+  string graph_id = 1;
+  string node_id = 2;
+}
+
+message RemoveNodeResponse {
+  string graph_id = 1;
+  string node_id = 2;
+}
+
+message ConnectNodesRequest {
+  string graph_id = 1;
+  string node_A_id = 2;
+  string node_B_id = 3;
+}
+
+message ConnectNodesResponse {
+  string graph_id = 1;
+  string node_A_id = 2;
+  string node_B_id = 3;
+}
+
+message DisconnectNodesRequest {
+  string graph_id = 1;
+  string node_A_id = 2;
+  string node_B_id = 3;
+}
+
+message DisconnectNodesResponse {
+  string graph_id = 1;
+  string node_A_id = 2;
+  string node_B_id = 3;
+}
+
+message NextActionRequest {
+  string graph_id = 1;
+  repeated Action actions = 2;
+}
+
+message NextActionResponse {
+  Action action = 1;
+}
+
+message SetStatsRequest {
+  string graph_id = 1;
+  repeated Stat stats = 2;
+}
+
+message SetStatsResponse {
+  string graph_id = 1;
+  repeated Stat stats = 2;
+}
+
+message EditGraphRequest {
+  oneof request {
+    AddNodeRequest add_node = 1;
+    RemoveNodeRequest remove_node = 2;
+    ConnectNodesRequest connect_nodes = 3;
+    DisconnectNodesRequest disconnect_nodes = 4;
+  }
+}
+
+message EditGraphRespose {
+  oneof response {
+    AddNodeResponse add_node = 1;
+    RemoveNodeResponse remove_node = 2;
+    ConnectNodesResponse connect_nodes = 3;
+    DisconnectNodesResponse disconnect_nodes = 4;
+  }
+}
+
+service UtilityAIService {
+  rpc GetGraphList(GetGraphListRequest) returns (GetGraphListResponse) {}
+  rpc GetGraph(GetGraphRequest) returns (GetGraphResponse) {}
+  rpc AddGraph(AddGraphRequest) returns (AddGraphResponse) {}
+  rpc RemoveGraph(RemoveGraphRequest) returns (RemoveGraphResponse) {}
+  rpc EditGraph(stream EditGraphRequest) returns (stream EditGraphResponse) {}
+  rpc NextAction(stream NextActionRequest) returns (stream NextActionResponse) {}
+  rpc SetStats(stream SetStatsRequest) returns (stream SetStatsResponse) {}
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message Rect {
+  float x_min = 1;
+  float y_min = 2;
+  float x_max = 3;
+  float y_max = 4;
+}
+
+message UtilityGraphNode {
+  string id = 1;
+  string type = 2;
+  int32 max_inputs = 3;
+  Rect bounds = 4;
+  repeated UtilityGraphNode connected_inputs = 5;
+}
+
+message UtilityGraph {
+  string id = 1;
+  repeated UtilityGraphNode = 2;
+}
+
+message GraphList {
+  repeated UtilityGraph = 1;
+}
+
+message ActionTarget {
+  string key = 1;
+  map<string, float> stats = 2;
+}
+
+message Action {
+  string id = 1;
+  ActionTarget selected_target = 2;
+  repeated ActionTarget valid_targets = 3;
+}
+
+message Stat {
+  string id = 1;
+  float value = 2;
+}
