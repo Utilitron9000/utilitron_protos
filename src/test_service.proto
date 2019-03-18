@@ -13,6 +13,6 @@ message GetPositionResponse {
 }
 
 service PositionService {
-  rpc GetPosition(GetPositionRequest) returns (GetPositionResponse) {}
+  rpc GetPosition(GetPositionRequest) returns (stream GetPositionResponse) {}
 }
 
