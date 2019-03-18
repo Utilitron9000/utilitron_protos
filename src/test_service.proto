@@ -8,11 +8,7 @@ message Point {
 message GetPositionRequest {
 }
 
-message GetPositionResponse {
-  Point p = 1;
-}
-
 service PositionService {
-  rpc GetPosition(GetPositionRequest) returns (stream GetPositionResponse) {}
+  rpc GetPosition(GetPositionRequest) returns (stream Point) {}
 }
 
